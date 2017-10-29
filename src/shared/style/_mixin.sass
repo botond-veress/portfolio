@@ -1,0 +1,120 @@
+@import 'theme'
+
+=stretch-custom($value, $position: absolute)
+    position: $position
+    top: $value
+    left: $value
+    right: $value
+    bottom: $value
+
+=stretch($position: absolute)
+    +stretch-custom(0, $position)
+
+=vertical-align-middle
+    display: inline-block
+    vertical-align: middle
+
+=vertical-align-content
+    +vertical-align-middle
+    position: relative
+    white-space: normal
+
+=vertical-align($height: 100%)
+    height: $height
+    white-space: nowrap
+
+    &:before
+        +vertical-align-middle
+        content: ''
+        width: 0
+        height: 100%
+
+=text-selection-none
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+=hover
+    &:hover
+        @content
+
+=focus
+    &:focus
+        @content
+
+=hover-and-focus
+    +hover
+        +focus
+            @content
+
+=hover-or-focus
+    &:hover,
+    &:focus
+        @content
+
+=disabled
+    &[disabled]
+        @content
+
+=not-disabled
+    &:not([disabled])
+        @content
+
+@function fade($color, $amount)
+    @return (fade-out($color, 1 - $amount))
+
+@function transition($name, $duration: 0.35s, $delay: 0s)
+    @return $name $duration ease-in-out $delay
+
+=fade-in
+    opacity: 1
+    visibility: visible
+
+=fade-out
+    opacity: 0
+    visibility: hidden
+
+=fadeable($visible: false, $duration: 0.35s, $delay: 0s)
+    @if $visible == false
+        +fade-out
+    @else
+        +fade-in
+    transition: transition(opacity, $duration, $delay), transition(visibility, $duration, $delay)
+
+=ellipsis
+    white-space: nowrap
+    overflow: hidden
+    -ms-text-overflow: ellipsis
+    -o-text-overflow: ellipsis
+    text-overflow: ellipsis
+
+=position-center
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+=position-center-vertical
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+
+=position-center-horizontal
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+
+=aspect-ratio($width, $height)
+    padding-bottom: 100% / ($width / $height)
+
+=clearfix
+    zoom: 1
+
+    &:before,
+    &:after
+        content: ''
+        display: table
+
+    &:after
+        clear: both
