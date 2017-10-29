@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "watch": "webpack-dev-server --config configuration/webpack.dev.config.babel.js --watch --compress --port 3100",
+    "watch": "PORT=3100 webpack-dev-server --config configuration/webpack.dev.config.babel.js --watch --compress",
     "build": "rimraf dist && webpack --config configuration/webpack.prod.config.babel.js",
     "heroku-postbuild": "yarn build"
   },

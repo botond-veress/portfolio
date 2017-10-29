@@ -1,4 +1,3 @@
-import yargs from 'yargs';
 import path from 'path';
 import webpack, { DefinePlugin } from 'webpack';
 import merge from 'webpack-merge';
@@ -11,24 +10,10 @@ import {
     resolveModules
 } from './parts';
 
-export const args = yargs
-    .option('port', {
-        describe: 'Listen on port while in development',
-        number: true,
-        default: 3100
-    })
-    .option('env.configuration', {
-        describe: 'Pass environment variables to the application',
-        default: {}
-    })
-    .argv;
-
-const configuration = merge({
+const CONFIGURATION = serialize({
+    api: process.env.api,
     version: pack.version
-}, args.env.configuration || {});
-
-export const HOST = '0.0.0.0';
-export const PORT = args.port;
+});
 
 export const PATH_SRC  = './src';
 export const PATH_DIST = './dist';
@@ -45,9 +30,12 @@ export const browserConfiguration = merge(
                 template: path.resolve(PATH_SRC, 'index.html'),
                 minify: {}
             }),
-            // new DefinePlugin(merge({}, process.env, {
-            //     CONFIGURATION: prepareConfiguration(configuration)
-            // }))
+            new DefinePlugin(merge({
+                'process.env': serialize({
+                    NODE_ENV: process.env.NODE_ENV,
+                }),
+                CONFIGURATION
+            }))
         ],
     },
     includeJavascript(),
@@ -58,22 +46,23 @@ export const browserConfiguration = merge(
 export const serverConfiguration = merge(
     {
         entry: path.resolve(PATH_SRC, 'server/index.jsx'),
-        target: 'node',
         plugins: [
-            // new DefinePlugin(merge({}, process.env, {
-            //     CONFIGURATION: prepareConfiguration(configuration)
-            // }))
-        ]
+            new DefinePlugin(merge({
+                CONFIGURATION
+            }))
+        ],
+        target: 'node'
     },
     includeJavascript(),
     lintJavaScript(),
     resolveModules(path.resolve(PATH_SRC))
 );
 
-function prepareConfiguration(configuration = {}) {
-    Object.keys(configuration).forEach((key) => {
-        configuration[key] = JSON.stringify(configuration[key]);
+
+function serialize(data = {}) {
+    Object.keys(data).forEach((key) => {
+        data[key] = JSON.stringify(data[key]);
     });
 
-    return configuration;
+    return data;
 }

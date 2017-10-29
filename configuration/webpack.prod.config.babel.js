@@ -1,5 +1,4 @@
 import {
-    DefinePlugin,
     HashedModuleIdsPlugin,
     LoaderOptionsPlugin
 } from 'webpack';
@@ -11,8 +10,6 @@ import path from 'path';
 import {
     browserConfiguration,
     serverConfiguration,
-    HOST,
-    PORT,
     PATH_SRC,
     PATH_DIST
 } from './webpack.common.config.babel';
@@ -36,11 +33,6 @@ const browserConfig = merge(
                 compress: { screw_ie8: true },
                 comments: false
             }),
-            // new DefinePlugin({
-            //     'process.env': {
-            //         NODE_ENV: JSON.stringify('production')
-            //     }
-            // }),
             new LoaderOptionsPlugin({
                 options: {
                     context: path.resolve(PATH_SRC),
@@ -51,22 +43,22 @@ const browserConfig = merge(
             }),
             new FaviconsWebpackPlugin({
                 logo: path.resolve(PATH_SRC, 'shared/image/favicon.png'),
-                prefix: 'favicon/[hash]',
+                prefix: './',
                 persistentCache: false,
                 inject: true,
                 background: '#fff',
                 title: 'Portfolio',
                 icons: {
-                    android: true,
-                    appleIcon: true,
-                    appleStartup: true,
+                    android: false,
+                    appleIcon: false,
+                    appleStartup: false,
                     coast: false,
                     favicons: true,
-                    firefox: true,
+                    firefox: false,
                     opengraph: false,
                     twitter: false,
-                    yandex: true,
-                    windows: true
+                    yandex: false,
+                    windows: false
                 }
             })
         ],
@@ -110,18 +102,6 @@ const serverConfig = merge(
     {
         plugins: [
             new HashedModuleIdsPlugin(),
-            new UglifyJsPlugin({
-                sourceMap: true,
-                beautify: false,
-                mangle: { screw_ie8 : true },
-                compress: { screw_ie8: true },
-                comments: false
-            }),
-            // new DefinePlugin({
-            //     'process.env': {
-            //         NODE_ENV: JSON.stringify('production')
-            //     }
-            // }),
             new LoaderOptionsPlugin({
                 options: {
                     context: path.resolve(PATH_SRC),
@@ -129,34 +109,13 @@ const serverConfig = merge(
                         path: path.resolve(PATH_DIST)
                     }
                 }
-            }),
-            new FaviconsWebpackPlugin({
-                logo: path.resolve(PATH_SRC, 'shared/image/favicon.png'),
-                prefix: './',
-                persistentCache: false,
-                inject: true,
-                background: '#fff',
-                title: 'Portfolio',
-                icons: {
-                    android: false,
-                    appleIcon: false,
-                    appleStartup: false,
-                    coast: false,
-                    favicons: true,
-                    firefox: false,
-                    opengraph: false,
-                    twitter: false,
-                    yandex: false,
-                    windows: false
-                }
             })
         ],
         output: {
             path: path.resolve(PATH_DIST),
             filename: 'server.js',
             libraryTarget: 'commonjs2'
-        },
-        devtool: 'source-map'
+        }
     },
     includeExtractedStylesheet({
         filename: 'stylesheet/[name]-[contenthash].css',
@@ -166,7 +125,6 @@ const serverConfig = merge(
         localIdentName: '[hash:base64:5]',
         minimize: true,
         includePath: path.resolve(PATH_SRC),
-        sourceMap: true
     }, true),
     includeImage([
         loadImage({

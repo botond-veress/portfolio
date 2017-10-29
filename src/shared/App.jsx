@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '@/shared/config';
+import config from '@/shared/config';
 import '@/shared/style/base.sass';
 
 import withMeta from '@/shared/component/withMeta';
@@ -11,7 +11,7 @@ class App extends Component {
     render() {
         return (
             <div className={style.hello}>
-                Hello
+                Hello (Version: {config.version})
             </div>
         );
     }

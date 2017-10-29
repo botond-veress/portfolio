@@ -7,9 +7,6 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '@/shared/App';
 
-// eslint-disable-next-line no-console
-console.log("CONFIGURATION:", JSON.stringify(process.env, null, 2));
-
 const PORT = process.env.PORT || 3000;
 const DIR = './dist';
 

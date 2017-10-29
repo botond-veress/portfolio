@@ -10,8 +10,6 @@ import path from 'path';
 import {
     browserConfiguration,
     serverConfiguration,
-    HOST,
-    PORT,
     PATH_SRC,
     PATH_DIST
 } from './webpack.common.config.babel';
@@ -23,6 +21,9 @@ import {
     devServer,
     resolveModules
 } from './parts';
+
+const HOST = '0.0.0.0';
+const PORT = process.env.PORT;
 
 const browserConfig = merge(
     {
@@ -86,44 +87,5 @@ const browserConfig = merge(
         port: PORT
     })
 );
-
-// const serverConfig = merge(
-//     serverConfiguration,
-//     {
-//         devtool: 'cheap-module-source-map',
-//         plugins: [
-//             new NamedModulesPlugin(),
-//             new NoEmitOnErrorsPlugin(),
-//             new LoaderOptionsPlugin({
-//                 options: {
-//                     context: path.resolve(PATH_SRC),
-//                     output: {
-//                         path: path.resolve(PATH_DIST)
-//                     }
-//                 }
-//             })
-//         ]
-//     },
-//     includeExtractedStylesheet({
-//         allChunks: true,
-//         ignoreOrder: true
-//     }, {
-//         localIdentName: '[name]-[local]',
-//         includePath: path.resolve(PATH_SRC),
-//         sourceMap: true
-//     }, true),
-//     includeImage([
-//         loadImage({
-//             name: '[name]-[hash:4].[ext]',
-//             outputPath: 'image/',
-//             emit: false
-//         })
-//     ]),
-//     includeIcons({
-//         name: '[name].[ext]',
-//         outputPath: 'font/',
-//         emit: false
-//     })
-// );
 
 export default browserConfig;
