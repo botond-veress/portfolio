@@ -35,7 +35,9 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.8",
     "resolve-url-loader": "^2.1.1",
+    "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
+    "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
     "webpack-merge": "^4.1.0"
   },
@@ -50,8 +52,10 @@
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^3.1.1",
     "react-router-dom": "^4.2.2",
-    "reset-css": "^2.2.1",
-    "rimraf": "^2.6.2",
-    "webpack": "^3.8.1"
+    "reset-css": "^2.2.1"
+  },
+  "engines": {
+    "node": "8.5.x",
+    "yarn": "1.1.x"
   }
 }
