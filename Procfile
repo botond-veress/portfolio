@@ -1,1 +1,1 @@
-web: pm2 start dist/server.js -i 0
+web: pm2 start dist/server.js -i max --attach
