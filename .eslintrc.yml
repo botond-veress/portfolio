@@ -1,0 +1,106 @@
+extends:
+  - airbnb
+
+plugins:
+  - react
+  - import
+
+parser: babel-eslint
+parserOptions:
+  sourceType: module
+
+env:
+  browser: true
+  es6: true
+
+rules:
+  # remove asap
+  react/prefer-stateless-function:
+    - off
+
+  indent:
+    - warn
+    - 4
+    -
+      SwitchCase: 1
+
+  react/jsx-indent:
+    - off
+    - 4
+
+  react/jsx-indent-props:
+    - off
+    - 4
+
+  comma-dangle:
+    - warn
+    - never
+
+  jsx-a11y/label-has-for:
+    - off
+
+  jsx-a11y/href-no-hash:
+    - off
+
+  import/no-unresolved:
+    - off
+
+  import/no-extraneous-dependencies:
+    - off
+
+  import/no-webpack-loader-syntax:
+    - off
+
+  import/extensions:
+    - off
+
+  import/prefer-default-export:
+    - off
+
+  arrow-parens:
+    - warn
+    - always
+
+  quotes:
+    - warn
+    - single
+    - allowTemplateLiterals: true
+
+  arrow-body-style:
+    - off
+
+  class-methods-use-this:
+    - off
+
+  camelcase:
+    - off
+
+  import/export:
+    - off
+
+  default-case:
+    - off
+
+  no-param-reassign:
+    - off
+
+  no-mixed-operators:
+    - off
+
+  react/prop-types:
+    - off
+
+  no-unused-vars:
+    - off
+
+  prefer-const:
+    - off
+
+  react/forbid-prop-types:
+    - off
+
+  import/no-mutable-exports:
+    - off
+
+  jsx-a11y/anchor-has-content:
+    - off
