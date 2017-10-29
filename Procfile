@@ -1,1 +1,1 @@
-web: node dist/server.js
+web: pm2 start dist/server.js -i 0
