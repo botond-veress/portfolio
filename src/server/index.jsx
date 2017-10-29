@@ -7,8 +7,11 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import App from '@/shared/App';
 
+// eslint-disable-next-line no-console
+console.log("CONFIGURATION:", JSON.stringify(process.env, null, 2));
+
 const PORT = process.env.PORT || 3000;
-const DIR = process.env.OUTPUT_DIR || './dist';
+const DIR = './dist';
 
 const readFile = Promise.promisify(fs.readFile);
 const file = path.resolve(DIR, 'index.html');
@@ -51,6 +54,6 @@ readFile(file, 'utf8').then((content) => {
     return createServer(part.left, part.right);
 }).catch((error) => {
     // eslint-disable-next-line no-console
-    console.error(error);
+    console.error('Error:', error);
 });
 

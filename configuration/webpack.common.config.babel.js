@@ -31,7 +31,7 @@ export const HOST = '0.0.0.0';
 export const PORT = args.port;
 
 export const PATH_SRC  = './src';
-export const PATH_DIST = process.env.OUTPUT_DIR || './dist';
+export const PATH_DIST = './dist';
 
 export const browserConfiguration = merge(
     {
@@ -45,9 +45,9 @@ export const browserConfiguration = merge(
                 template: path.resolve(PATH_SRC, 'index.html'),
                 minify: {}
             }),
-            new DefinePlugin({
-                CONFIGURATION: prepareConfiguration(configuration)
-            })
+            // new DefinePlugin(merge({}, process.env, {
+            //     CONFIGURATION: prepareConfiguration(configuration)
+            // }))
         ],
     },
     includeJavascript(),
@@ -60,9 +60,9 @@ export const serverConfiguration = merge(
         entry: path.resolve(PATH_SRC, 'server/index.jsx'),
         target: 'node',
         plugins: [
-            new DefinePlugin({
-                CONFIGURATION: prepareConfiguration(configuration)
-            })
+            // new DefinePlugin(merge({}, process.env, {
+            //     CONFIGURATION: prepareConfiguration(configuration)
+            // }))
         ]
     },
     includeJavascript(),

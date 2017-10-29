@@ -36,11 +36,11 @@ const browserConfig = merge(
                 compress: { screw_ie8: true },
                 comments: false
             }),
-            new DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
-                }
-            }),
+            // new DefinePlugin({
+            //     'process.env': {
+            //         NODE_ENV: JSON.stringify('production')
+            //     }
+            // }),
             new LoaderOptionsPlugin({
                 options: {
                     context: path.resolve(PATH_SRC),
@@ -117,11 +117,11 @@ const serverConfig = merge(
                 compress: { screw_ie8: true },
                 comments: false
             }),
-            new DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
-                }
-            }),
+            // new DefinePlugin({
+            //     'process.env': {
+            //         NODE_ENV: JSON.stringify('production')
+            //     }
+            // }),
             new LoaderOptionsPlugin({
                 options: {
                     context: path.resolve(PATH_SRC),

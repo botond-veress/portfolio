@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line
+var CONFIGURATION;
 const config = CONFIGURATION || {};
 
 if (config.verbose) {
