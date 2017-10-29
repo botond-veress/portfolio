@@ -55,23 +55,20 @@ export const browserConfiguration = merge(
     resolveModules(path.resolve(PATH_SRC))
 );
 
-// export const serverConfiguration = merge(
-//     {
-//         entry: path.resolve(PATH_SRC, 'server/index.jsx'),
-//         target: 'node',
-//         output: {
-//             path: path.resolve(PATH_DIST),
-//             filename: 'server.js',
-//             libraryTarget: 'commonjs2'
-//         },
-//         plugins: [
-//             new DefinePlugin(prepareConfiguration(configuration))
-//         ]
-//     },
-//     includeJavascript(),
-//     lintJavaScript(),
-//     resolveModules(path.resolve(PATH_SRC))
-// );
+export const serverConfiguration = merge(
+    {
+        entry: path.resolve(PATH_SRC, 'server/index.jsx'),
+        target: 'node',
+        plugins: [
+            new DefinePlugin({
+                CONFIGURATION: prepareConfiguration(configuration)
+            })
+        ]
+    },
+    includeJavascript(),
+    lintJavaScript(),
+    resolveModules(path.resolve(PATH_SRC))
+);
 
 function prepareConfiguration(configuration = {}) {
     Object.keys(configuration).forEach((key) => {

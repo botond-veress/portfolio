@@ -1,3 +1,5 @@
+import { LoaderOptionsPlugin } from 'webpack';
+
 export function includeJavascript() {
     return {
         module: {
@@ -30,6 +32,16 @@ export function includeJavascript() {
 
 export function lintJavaScript() {
     return {
+        plugins: [
+            new LoaderOptionsPlugin({
+                options: {
+                    eslint: {
+                        failOnError: true,
+                        failOnWarning: true
+                    }
+                }
+            })
+        ],
         module: {
             rules: [
                 {

@@ -108,7 +108,6 @@ const browserConfig = merge(
 const serverConfig = merge(
     serverConfiguration,
     {
-        devtool: 'source-map',
         plugins: [
             new HashedModuleIdsPlugin(),
             new UglifyJsPlugin({
@@ -133,27 +132,34 @@ const serverConfig = merge(
             }),
             new FaviconsWebpackPlugin({
                 logo: path.resolve(PATH_SRC, 'shared/image/favicon.png'),
-                prefix: 'favicon/[hash]',
+                prefix: './',
                 persistentCache: false,
                 inject: true,
                 background: '#fff',
                 title: 'Portfolio',
                 icons: {
-                    android: true,
-                    appleIcon: true,
-                    appleStartup: true,
+                    android: false,
+                    appleIcon: false,
+                    appleStartup: false,
                     coast: false,
                     favicons: true,
-                    firefox: true,
+                    firefox: false,
                     opengraph: false,
                     twitter: false,
-                    yandex: true,
-                    windows: true
+                    yandex: false,
+                    windows: false
                 }
             })
-        ]
+        ],
+        output: {
+            path: path.resolve(PATH_DIST),
+            filename: 'server.js',
+            libraryTarget: 'commonjs2'
+        },
+        devtool: 'source-map'
     },
     includeExtractedStylesheet({
+        filename: 'stylesheet/[name]-[contenthash].css',
         allChunks: true,
         ignoreOrder: true
     }, {
@@ -176,4 +182,4 @@ const serverConfig = merge(
     })
 );
 
-export default [browserConfig];
+export default [browserConfig, serverConfig];

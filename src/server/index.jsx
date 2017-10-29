@@ -5,10 +5,13 @@ import express from 'express';
 import React from 'react';
 
 import { renderToString } from 'react-dom/server';
-import LandingApp from '@/shared/landing/LandingApp';
+import App from '@/shared/App';
+
+const PORT = process.env.PORT || 3000;
+const DIR = process.env.OUTPUT_DIR || './dist';
 
 const readFile = Promise.promisify(fs.readFile);
-const file = path.resolve('./dist/index.html');
+const file = path.resolve(DIR, 'index.html');
 
 function splitIndexBy(content, term) {
     let index = content.indexOf(term);
@@ -27,14 +30,14 @@ function createServer(left, right) {
     const app = express();
 
     app.get('/', (request, response) => {
-        response.send(`${left}${renderToString(<LandingApp />)}${right}`);
+        response.send(`${left}${renderToString(<App />)}${right}`);
     });
 
-    app.use(express.static('./dist'));
+    app.use(express.static(DIR));
 
-    app.listen(process.env.PORT || 3101, () => {
+    app.listen(PORT, () => {
         // eslint-disable-next-line no-console
-        console.log('Server is listening...');
+        console.log(`Server is listening on :${PORT}...`);
     });
 }
 
@@ -42,7 +45,7 @@ readFile(file, 'utf8').then((content) => {
     let part = splitIndexBy(content, 'id="app">');
 
     if (!part) {
-        return Promise.reject('Container with id "app" not found.');
+        return Promise.reject(new Error('Element with id "app" not found.'));
     }
 
     return createServer(part.left, part.right);

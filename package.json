@@ -8,7 +8,7 @@
   "scripts": {
     "watch": "webpack-dev-server --config configuration/webpack.dev.config.babel.js --watch --compress --port 3100",
     "build": "rimraf dist && webpack --config configuration/webpack.prod.config.babel.js",
-    "server": "node dist/server.js"
+    "heroku-postinstall": "yarn build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -46,6 +46,7 @@
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
+    "pm2": "^2.7.2",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
