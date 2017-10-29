@@ -31,7 +31,7 @@ export const HOST = '0.0.0.0';
 export const PORT = args.port;
 
 export const PATH_SRC  = './src';
-export const PATH_DIST = './dist';
+export const PATH_DIST = process.env.OUTPUT_DIR || './dist';
 
 export const browserConfiguration = merge(
     {
