@@ -8,6 +8,7 @@
   "scripts": {
     "watch": "PORT=3100 webpack-dev-server --config configuration/webpack.dev.config.babel.js --watch --compress",
     "build": "rimraf dist && webpack --config configuration/webpack.prod.config.babel.js",
+    "test": "echo All good",
     "heroku-postbuild": "yarn build"
   },
   "devDependencies": {
